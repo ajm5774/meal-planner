@@ -67,7 +67,7 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'root',
 		'password' => '',
-		'database' => 'database_name',
+		'database' => 'meal_planner',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);
