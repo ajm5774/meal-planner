@@ -29,6 +29,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 		<link href="/css/default.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="/css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+		<script type="text/javascript" charset="utf-8" src="/js/jquery.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/jquery.dataTables.js"></script>
 	</head>
 <body>
 	<div id="header" class="container">
@@ -37,16 +39,43 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="/pages/about_us" accesskey="1" title="">About</a></li>
-				<li><a href="/users/login" accesskey="2" title="">Login</a></li>
-				<li><a href="/users/add" accesskey="3" title="">Join</a></li>
+				<?php
+
+				if($loggedIn)//This variable is past from the controller (see AppController::beforeFilter)
+				{
+					$menu = $this->html->tag('li', $this->html->tag('a', 'Inventory', array('href' => '/users/inventory', 'accesskey' => '1')));
+					$menu .= $this->html->tag('li', $this->html->tag('a', 'Schedule', array('href' => '/users/schedule', 'accesskey' => '2')));
+					$menu .= $this->html->tag('li', $this->html->tag('a', 'Settings', array('href' => '/users/settings', 'accesskey' => '3')));
+					$menu .= $this->html->tag('li', $this->html->tag('a', 'Help', array('href' => '/pages/help', 'accesskey' => '4')));
+
+					$menu .= $this->html->tag('li', $this->html->tag('a', 'logout', array('href' => '/users/logout', 'accesskey' => '5')));
+				}
+				else
+				{
+					$menu = $this->html->tag('li', $this->html->tag('a', 'About', array('href' => '/pages/about_us', 'accesskey' => '1')));
+					$menu .= $this->html->tag('li', $this->html->tag('a', 'Login', array('href' => '/users/login', 'accesskey' => '2')));
+					$menu .= $this->html->tag('li', $this->html->tag('a', 'Join', array('href' => '/users/add', 'accesskey' => '3')));
+				}
+
+				echo $menu
+				?>
 			</ul>
 		</div>
     </div>
-    <div id="banner" class="container"><a href="#" class="image image-centered">
-    	<img src="/img/healthy-51.jpg" alt="" /></a></div>
+    <?php
+
+			if(!$loggedIn)//This variable is past from the controller (see AppController::beforeFilter)
+			{
+
+				$image = $this->html->tag('img','', array('src' => '/img/healthy-51.jpg'));
+				$link = $this->html->tag('a', $image, array('class' => 'image image-centered'));
+				echo $this->html->div('container', $link, array('id' => 'banner'));
+			}
+	?>
 	<div id="wrapper">
-			<?php echo $this->Session->flash(); ?>
+			<div id="flash">
+				<?php //echo $this->Session->flash(); ?>
+			</div>
 
 			<?php echo $this->fetch('content'); ?>
 	</div>

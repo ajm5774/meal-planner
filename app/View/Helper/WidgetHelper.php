@@ -9,10 +9,10 @@ class WidgetHelper extends FormHelper
 	/**
 	 * Wraps the html text with center tags
 	 *
-	 * @param string $html
+	 * @param string $content - html content to be centered
 	 * @return string
 	 */
-	public function center($html){
-		return '<center>' . $html . '</center>';
+	public function center($content){
+		return '<center>' . $content . '</center>';
 	}
 }

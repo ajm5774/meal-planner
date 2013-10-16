@@ -33,19 +33,28 @@ App::uses ( 'Controller', 'Controller' );
  */
 class AppController extends Controller {
 	public $components = array (
-			"Session",
+			'Session',
 			'Auth' => array (
 					'loginRedirect' => array (
 							'controller' => 'users',
-							'action' => 'login'
+							'action' => 'schedule'
 					),
 					'logoutRedirect' => array (
 							'controller' => 'users',
 							'action' => 'login'
 					),
-					'authError' => "You cannot access that page",
+					// 'authError' => "You cannot access that page",
 					'authorize' => array (
 							'Controller'
+					),
+					'authenticate' => array (
+							'Form' => array (
+									'userModel' => 'User',
+									'fields' => array (
+											'username'=>'username',
+											'password'=>'password'
+									)
+							)
 					)
 			)
 	);
@@ -67,6 +76,7 @@ class AppController extends Controller {
 	public function beforeFilter() {
 		// they can acces the index and view actions of any controller
 		// as long as they dont override
-		$this->Auth->allow ( 'index', 'view', 'display', 'about_us' );
+		$this->Auth->allow ( 'index', 'view', 'about_us' );
+		$this->set ( 'loggedIn', $this->Auth->loggedIn () );
 	}
 }

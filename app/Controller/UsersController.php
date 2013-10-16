@@ -12,11 +12,13 @@ class UsersController extends AppController {
 
 	/**
 	 * determines what not logged in users can do
-	 	*/
+	 */
 	public function beforeFilter() {
+		parent::beforeFilter ();
 		// they can acces the index and view actions of any controller
 		// as long as they dont override
-		$this->Auth->allow ( 'index', 'view', 'add');
+		$this->Auth->allow ( 'add' );
+		$this->set ( 'loggedIn', $this->Auth->loggedIn () );
 	}
 
 	/**
@@ -24,11 +26,11 @@ class UsersController extends AppController {
 	 */
 	public function login() {
 		if ($this->request->is ( 'post' )) {
-			if ($this->Auth->login ()) {
-				$this->redirect ( $this->Auth->redirectUrl () );
+			if ($this->Auth->login ( $this->request->data ['User'] ['username'] )) {
+				return $this->redirect ( $this->Auth->redirect () );
+			} else {
+				$this->Session->setFlash ( 'Incorrect Username or Password', 'default', array (), 'flash' );
 			}
-		} else {
-			$this->Session->setFlash ( 'Incorrect Username or Password', 'default', array (), 'auth' );
 		}
 	}
 
@@ -42,17 +44,37 @@ class UsersController extends AppController {
 	/**
 	 * attempts to add a user to the users table
 	 */
-	public function add(){
-		if($this->request->is('post'))
-		{
-			if($this->User->save($this->request->data))
-			{
-				$this->Session->setFlash('Your account has been successfully created!');
-				$this->redirect(array('action' => 'index'));
-			}
-			else{
-				$this->Session->setFlash('Error creating account!');
+	public function add() {
+		if ($this->request->is ( 'post' )) {
+			$this->User->create ();
+			if ($this->User->save ( $this->request->data )) {
+				$this->Session->setFlash ( 'Your account has been successfully created!' );
+				$this->redirect ( array (
+						'action' => 'setup'
+				) );
+			} else {
+				$this->Session->setFlash ( 'Error creating account!' );
 			}
 		}
+	}
+
+	/**
+	 */
+	public function setup() {
+	}
+
+	/**
+	 */
+	public function schedule() {
+	}
+
+	/**
+	 */
+	public function inventory() {
+	}
+
+	/**
+	 */
+	public function settings() {
 	}
 }
