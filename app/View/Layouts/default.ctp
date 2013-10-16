@@ -27,32 +27,30 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		<meta name="keywords" content="" />
 		<meta name="description" content="" />
 		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
-		<link href="default.css" rel="stylesheet" type="text/css" media="all" />
-		<link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
-
-		<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
-
+		<link href="/css/default.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="/css/fonts.css" rel="stylesheet" type="text/css" media="all" />
 	</head>
 <body>
-	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
+	<div id="header" class="container">
+		<div id="logo">
+			<h1><a href="#">Smart Meals</a></h1>
 		</div>
-		<div id="content">
-
+		<div id="menu">
+			<ul>
+				<li><a href="/pages/about_us" accesskey="1" title="">About</a></li>
+				<li><a href="/users/login" accesskey="2" title="">Login</a></li>
+				<li><a href="/users/add" accesskey="3" title="">Join</a></li>
+			</ul>
+		</div>
+    </div>
+    <div id="banner" class="container"><a href="#" class="image image-centered"><img src="images/pic01.jpg" alt="" /></a></div>
+	<div id="wrapper">
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false)
-				);
-			?>
-		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	<div id="copyright" class="container">
+		<p>Copyright (c) 2013 SmartMeal.com All rights reserved. | Photos by <a href="http://google.com">Fotogrph</a> | Design by <a href="http://www.freecsstemplates.org/" rel="nofollow">FreeCSSTemplates.org</a>.</p>
+	</div>
 </body>
 </html>
