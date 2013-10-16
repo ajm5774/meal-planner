@@ -5,8 +5,8 @@
 <div id="three-column" class="container">
 	<div id="tbox1"> <span class="icon icon-food"></span>
 		<h2>Join Now</h2>
-		<p>Smart Meal is a fun <Strong>free</Strong> program so what do you have to lose try it out now </p>
-		<a href="#" class="button"> Create User</a> </div>
+		<p>Smart Meal is a fun <Strong>free</Strong> program so what do you have to lose. Try it out now! </p>
+		<a href="#" class="button">Create User</a> </div>
 	<div id="tbox2"> <span class="icon icon-share-this-sign"></span>
 		<h2>Invite Friends</h2>
 		<p>Share this wonderful Web App with all my friends</p>

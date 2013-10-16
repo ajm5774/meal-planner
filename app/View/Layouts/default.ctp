@@ -43,7 +43,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			</ul>
 		</div>
     </div>
-    <div id="banner" class="container"><a href="#" class="image image-centered"><img src="images/pic01.jpg" alt="" /></a></div>
+    <div id="banner" class="container"><a href="#" class="image image-centered">
+    	<img src="/img/healthy-51.jpg" alt="" /></a></div>
 	<div id="wrapper">
 			<?php echo $this->Session->flash(); ?>
 

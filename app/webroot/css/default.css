@@ -7,7 +7,7 @@
 	{
 		margin: 0px;
 		padding: 0px;
-		background: #1B1B1B url(images/bg01.png) repeat;
+		background: #1B1B1B url(/img/bg01.png) repeat;
 		font-family: 'Source Sans Pro', sans-serif;
 		font-size: 12pt;
 		font-weight: 400;
@@ -366,6 +366,7 @@
 	#wrapper
 	{
 		padding-top: 3em;
+		padding-bottom: 3em;
 		background: #EAE9E5;
 		border-top: 4px solid #319065;
 		border-bottom: 4px solid #319065;

@@ -11,6 +11,15 @@ class UsersController extends AppController {
 	var $name = 'Users';
 
 	/**
+	 * determines what not logged in users can do
+	 	*/
+	public function beforeFilter() {
+		// they can acces the index and view actions of any controller
+		// as long as they dont override
+		$this->Auth->allow ( 'index', 'view', 'add');
+	}
+
+	/**
 	 * Logs in the user
 	 */
 	public function login() {
@@ -30,7 +39,20 @@ class UsersController extends AppController {
 		$this->redirect ( $this->Auth->logout () );
 	}
 
-/**
- * The default page for users
- */
+	/**
+	 * attempts to add a user to the users table
+	 */
+	public function add(){
+		if($this->request->is('post'))
+		{
+			if($this->User->save($this->request->data))
+			{
+				$this->Session->setFlash('Your account has been successfully created!');
+				$this->redirect(array('action' => 'index'));
+			}
+			else{
+				$this->Session->setFlash('Error creating account!');
+			}
+		}
+	}
 }
