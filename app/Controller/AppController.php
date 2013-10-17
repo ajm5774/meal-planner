@@ -76,7 +76,7 @@ class AppController extends Controller {
 	public function beforeFilter() {
 		// they can acces the index and view actions of any controller
 		// as long as they dont override
-		$this->Auth->allow ( 'index', 'view', 'about_us' );
+		$this->Auth->allow ( 'index', 'view', 'about_us', 'display' );
 		$this->set ( 'loggedIn', $this->Auth->loggedIn () );
 	}
 }

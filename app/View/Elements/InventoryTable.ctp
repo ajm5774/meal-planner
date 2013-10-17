@@ -7,11 +7,14 @@
 if(!isset($inventory))
 	$inventory = $this->requestAction ('/users/inventory');
 
-$headers = $this->Html->tableHeaders('Item', 'Quantity', 'Unit');
+if(empty($inventory))
+	$inventory = array(array('Chicken Breast', 5, '0z'), array('Chicken Thighs', 10, '0z'));
+
+$headers = $this->Html->tableHeaders(array('Item', 'Quantity', 'Unit'));
 
 $tableCells = $this->Html->tableCells($inventory);
 
-echo $this->html->table($headers . $tableCells, array('id' => 'invTable'));
+echo $this->html->tag('table', $headers . $tableCells, array('id' => 'invTable'));
 
 ?>
 

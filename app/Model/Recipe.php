@@ -5,13 +5,31 @@
  * @author Andrew
  */
 class Recipe extends AppModel {
-	public $hasAndBelongsToMany = array(
-			'Ingredient' =>
-			array(
-					'className' => 'Ingredient',
-					'joinTable' => 'ingredients_recipes',
+	public $hasMany = array(
+			'Schedule' => array(
+					'className' => 'Schedule',
 					'foreignKey' => 'recipe_id',
-					'associationForeignKey' => 'ingredient_id',
+					'dependent' => true
+			),
+			'RecipeIngredient' => array(
+					'className' => 'RecipeIngredient',
+					'foreignKey' => 'recipe_id',
+					'dependent' => true
+			),
+			'UserRecipe' => array(
+					'className' => 'UserRecipe',
+					'foreignKey' => 'recipe_id',
+					'dependent' => true
+			)
+	);
+	
+	public $hasAndBelongsToMany = array(
+			'Appliance' =>
+			array(
+					'className' => 'Appliance',
+					'joinTable' => 'recipe_appliances',
+					'foreignKey' => 'recipe_id',
+					'associationForeignKey' => 'app_id',
 					'unique' => true,
 					'conditions' => '',
 					'fields' => '',
