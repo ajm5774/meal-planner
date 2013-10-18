@@ -4,10 +4,11 @@
  *
  * @author - Andrew Mueller
  */
+
+App::uses('AuthComponent', 'Controller/Component');
+
 class User extends AppModel
 {
-	var $name = 'User';
-	
 	public $hasMany = array(
 			'Inventory' => array(
 					'className' => 'Inventory',
@@ -38,16 +39,28 @@ class User extends AppModel
 					'with' => ''
 			)
 	);
-
-	public function beforeSave($options = array()){
-		if(isset($this->data[$this->alias]['Password']))
-		{
-			//hash the password before its stored
-			$this->data[$this->alias]['Password'] = AuthComponent::password($this->data[$this->alias]['Password']);
+	
+	public $validate = array(
+			'username' => array(
+					'required' => array(
+							'rule' => array('notEmpty'),
+							'message' => 'A username is required'
+					)
+			),
+			'password' => array(
+					'required' => array(
+							'rule' => array('notEmpty'),
+							'message' => 'A password is required'
+					)
+			),
+	);
+	
+	public function beforeSave($options = array()) {
+		if (isset($this->data[$this->alias]['password'])) {
+			$this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
 		}
+		
 		unset($this->data[$this->alias]['password_confirmation']);
-
-		debug($this->data);
 		return true;
 	}
 }

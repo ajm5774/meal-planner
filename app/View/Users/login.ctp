@@ -1,13 +1,13 @@
 <?php
 $table = $this->Session->flash();
-$table .= $this->Form->create ();
+$table .= $this->Form->create ('User');
 
 $tableData = array (
 		array ('Username:',
-				$this->Form->input ( 'User.username', array('label' => false) )
+				$this->Form->input ( 'username', array('label' => false) )
 		),
 		array ('Password:',
-				$this->Form->input ( 'User.password', array('label' => false)  )
+				$this->Form->input ( 'password', array('label' => false)  )
 		),
 );
 

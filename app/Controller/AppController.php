@@ -36,26 +36,13 @@ class AppController extends Controller {
 			'Session',
 			'Auth' => array (
 					'loginRedirect' => array (
-							'controller' => 'users',
-							'action' => 'schedule'
+							'controller' => 'schedules',
+							'action' => 'index'
 					),
 					'logoutRedirect' => array (
 							'controller' => 'users',
 							'action' => 'login'
 					),
-					// 'authError' => "You cannot access that page",
-					'authorize' => array (
-							'Controller'
-					),
-					'authenticate' => array (
-							'Form' => array (
-									'userModel' => 'User',
-									'fields' => array (
-											'username'=>'username',
-											'password'=>'password'
-									)
-							)
-					)
 			)
 	);
 
