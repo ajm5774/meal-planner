@@ -33,16 +33,21 @@ class InventoriesController extends AppController {
 	public function index() {
 		return true;
 	}
-	
+
 	/**
 	 * attempts to add a user to the users table
 	 */
 	public function edit() {
+
+		$ingredients = $this->requestAction('/ingredients/index');
+		$this->set('ingredients', $ingredients);
+		$this->set('units', $this->Inventory->enumUnit());
+
 		if ($this->request->is ( 'post' )) {
 			Debugger::log($this->request->data());
 			if ($this->Inventory->save ( $this->request->data )) {
 				$this->Session->setFlash ( 'Inventory item added!' );
-	
+
 			} else {
 				$this->Session->setFlash ( 'Error creating account!' );
 			}
@@ -53,18 +58,18 @@ class InventoriesController extends AppController {
 			$inventory = $this->Inventory->find('all', array('conditions' => array('User.id' => $id)));
 			$inventory = Hash::extract($inventory, '{n}.Inventory');
 			$inventory = Hash::remove($inventory, '{n}.user_id');
-			
-			debug($inventory);
-				
+
+			foreach($inventory as $index => &$attr)
+			{
+				$attr['ingredient_id'] = $ingredients[$attr['ingredient_id']];
+			}
 			$this->set('inventory', $inventory);
+
+			return $inventory;
 		}
-		
-		$ingredients = $this->requestAction('/ingredients/index');
-		$this->set('ingredients', $ingredients);		
+
+
+
 	}
 
-	/**
-	 */
-	public function settings() {
-	}
 }

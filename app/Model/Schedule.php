@@ -6,4 +6,8 @@
  */
 class Schedule extends AppModel {
 	public $belongsTo = array('Recipe', 'User');
+
+	const BREAKFAST = 0;
+	const LUNCH = 1;
+	const DINNER = 2;
 }

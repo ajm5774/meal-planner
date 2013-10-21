@@ -12,13 +12,6 @@ class Appliance extends AppModel {
 					'foreignKey' => 'app_id',
 					'associationForeignKey' => 'user_id',
 					'unique' => true,
-					'conditions' => '',
-					'fields' => '',
-					'order' => '',
-					'limit' => '',
-					'offset' => '',
-					'finderQuery' => '',
-					'with' => '' 
 			),
 			'Recipe' => array (
 					'className' => 'Recipe',
@@ -26,13 +19,6 @@ class Appliance extends AppModel {
 					'foreignKey' => 'app_id',
 					'associationForeignKey' => 'recipe_id',
 					'unique' => true,
-					'conditions' => '',
-					'fields' => '',
-					'order' => '',
-					'limit' => '',
-					'offset' => '',
-					'finderQuery' => '',
-					'with' => '' 
-			) 
+			)
 	);
 }

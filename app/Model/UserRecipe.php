@@ -6,4 +6,7 @@
  */
 class UserRecipe extends AppModel {
 	public $belongsTo = array('Recipe', 'User');
+
+	const FAVORITE = 0;
+	const DISLIKE = 1;
 }

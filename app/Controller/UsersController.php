@@ -9,7 +9,7 @@
  */
 class UsersController extends AppController {
 	var $name = 'Users';
-	
+
 	/**
 	 * determines what not logged in users can do
 	 */
@@ -58,5 +58,42 @@ class UsersController extends AppController {
 				$this->Session->setFlash ( 'Error creating account!' );
 			}
 		}
+	}
+
+	public function settings()
+	{
+		$data = $this->User->find('all');
+
+		$this->set('data', $data);
+	}
+
+	public function setup()
+	{
+		$this->loadModel('Ingredient');
+		$this->set('ingredients', $this->Ingredient->find('list'));
+		$this->set('units', $this->Ingredient->enumUnit());
+	}
+
+	public function appliances()
+	{
+		$id = $this->Auth->user();
+
+		$this->loadModel('Appliance');
+		$allAppliances = $this->Appliance->find('list');
+		$myAppliances = $this->User->find('all', array('conditions' => array('User.id' => $id),
+														'contain' => 'Appliance'));
+
+		$temp = array();
+		foreach($myAppliances[0]['Appliance'] as $index => &$fields)
+		{
+			$temp[$index]['id'] = $fields['id'];
+			$temp[$index]['name'] = $fields['name'];
+		}
+		$myAppliances = $temp;
+
+		$this->set('myAppliances', $myAppliances);
+		$this->set('allAppliances', $allAppliances);
+
+		return array($myAppliances, $allAppliances);
 	}
 }

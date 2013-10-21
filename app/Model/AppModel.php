@@ -33,4 +33,26 @@ App::uses('Model', 'Model');
  */
 class AppModel extends Model {
 	var $actsAs = array('Containable');
+
+	/**
+	 * Enum for ingredient quantity unit
+	 *
+	 * @param $key - $key into the unit map
+	 */
+	public function enumUnit($key = null)
+	{
+		$options = array(
+			self::OZ => 'oz',
+				self::LB => 'lb',
+				self::L => 'l',
+		);
+
+		if($key === null)
+			return $options;
+		return $options[$key];
+	}
+
+	const OZ = 1;
+	const LB = 2;
+	const L = 3;
 }

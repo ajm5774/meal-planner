@@ -21,7 +21,7 @@ class User extends AppModel
 					'dependent' => true
 			),
 	);
-	
+
 	public $hasAndBelongsToMany = array(
 			'Appliance' =>
 			array(
@@ -30,16 +30,9 @@ class User extends AppModel
 					'foreignKey' => 'user_id',
 					'associationForeignKey' => 'app_id',
 					'unique' => true,
-					'conditions' => '',
-					'fields' => '',
-					'order' => '',
-					'limit' => '',
-					'offset' => '',
-					'finderQuery' => '',
-					'with' => ''
 			)
 	);
-	
+
 	public $validate = array(
 			'username' => array(
 					'required' => array(
@@ -54,12 +47,12 @@ class User extends AppModel
 					)
 			),
 	);
-	
+
 	public function beforeSave($options = array()) {
 		if (isset($this->data[$this->alias]['password'])) {
 			$this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
 		}
-		
+
 		unset($this->data[$this->alias]['password_confirmation']);
 		return true;
 	}
