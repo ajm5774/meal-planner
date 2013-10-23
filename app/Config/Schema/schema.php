@@ -54,7 +54,7 @@ class AppSchema extends CakeSchema {
 							'Schedule' => array (
 									'user_id' => 1,
 									'recipe_id' => 1,
-									'date' => '10/24/2013',
+									'date' => '2013-10-24',
 									'meal' => 1
 							)
 					) );

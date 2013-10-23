@@ -58,4 +58,11 @@ class SchedulesController extends AppController {
 		}
 
 	}
+	
+	public function generate()
+	{
+		$inventory = $this->Inventory->find('all');
+		
+		$schedule = $this->Schedule->generate($inventory);
+	}
 }

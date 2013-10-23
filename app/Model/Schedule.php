@@ -6,6 +6,8 @@
  */
 class Schedule extends AppModel {
 	public $belongsTo = array('Recipe', 'User');
+	
+	public $actsAs = array('GreedySchedule');
 
 	const BREAKFAST = 0;
 	const LUNCH = 1;

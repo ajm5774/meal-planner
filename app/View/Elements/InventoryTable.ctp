@@ -13,7 +13,7 @@ if(empty($inventory))
 	$inventory = array(array('Chicken Breast', 5, '0z'), array('Chicken Thighs', 10, '0z'));
 
 if(empty($options))
-	$options = array();
+	$options = array('id' => 'sidebar');
 $element = '';
 $headers = $this->Html->tableHeaders(array('id', 'Item', 'Quantity', 'Unit'));
 $headers = $this->Html->tag('thead', $headers);
