@@ -4,8 +4,8 @@
  *
  * @author Andrew
  */
-class GreedyScheduleBehavior extends Behavior {
-	
+class GreedyScheduleBehavior extends ModelBehavior {
+
 	public function generate($inventory)
 	{
 		debug($inventory);

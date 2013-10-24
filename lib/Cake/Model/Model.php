@@ -3374,9 +3374,6 @@ class Model extends Object implements CakeEventListener {
  * @return array
  */
 	public function joinModel($assoc, $keys = array()) {
-		Debugger::log($assoc);
-		Debugger::log($keys);
-		Debugger::log($this->alias);
 		if (is_string($assoc)) {
 			list(, $assoc) = pluginSplit($assoc);
 			return array($assoc, array_keys($this->{$assoc}->schema()));

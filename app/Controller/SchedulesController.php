@@ -7,7 +7,7 @@
  *
  * @author - Andrew Mueller
  */
-
+App::uses('CakeTime', 'Utility');
 class SchedulesController extends AppController {
 	var $name = 'Schedules';
 
@@ -49,20 +49,34 @@ class SchedulesController extends AppController {
 		if ($this->request->is ( 'get' )) {
 			$name = $this->Auth->user();
 			//$this->Inventory->contain();
-			$schedule = $this->Schedule->find('all', array('conditions' => array('User.username' => $name)));
+			$start = date('Y-m-d', strtotime('now'));
+			$end = date('Y-m-d', strtotime('+4 day'));
+			$schedule = $this->Schedule->find('all', array('conditions' => array('User.username' => $name, 'Schedule.date <=' => $end, 'Schedule.date >=' => $start)));
+			$meals['breakfast'] = Hash::extract($schedule, '{n}.Schedule[meal=1]');
+			$meals['lunch'] = Hash::extract($schedule, '{n}.Schedule[meal=2]');
+			$meals['dinner'] = Hash::extract($schedule, '{n}.Schedule[meal=3]');
 
-			//$this->Ingredient->contain();
-			$schedule = $this->Schedule->find('all');
-			debug($schedule);
+			$recipes = $this->Schedule->Recipe->find('list');
+
+			foreach($meals as &$meal)
+			{
+				foreach($meal as $index => &$fields)
+				{
+					$fields['recipe_id'] = $recipes[$fields['recipe_id']];
+				}
+			}
+			$this->set('breakfasts', $meals['breakfast']);
+			$this->set('lunch', $meals['lunch']);
+			$this->set('dinner', $meals['dinner']);
 			$this->set('schedule', $schedule);
 		}
 
 	}
-	
+
 	public function generate()
 	{
 		$inventory = $this->Inventory->find('all');
-		
+
 		$schedule = $this->Schedule->generate($inventory);
 	}
 }

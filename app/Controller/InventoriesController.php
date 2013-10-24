@@ -17,7 +17,13 @@ class InventoriesController extends AppController {
 	 * attempts to add a user to the users table
 	 */
 	public function add() {
+		$id = $this->Auth->user('id');
+
 		if ($this->request->is ( 'post' )) {
+			Debugger::log($this->request->data);
+			debug($this->request->data);
+
+			$this->request->data['Inventory']['user_id'] = $id;
 			$this->Inventory->create ();
 			if ($this->Inventory->save ( $this->request->data )) {
 				$this->Session->setFlash ( 'Inventory item added!' );
@@ -26,6 +32,8 @@ class InventoriesController extends AppController {
 				$this->Session->setFlash ( 'Error creating account!' );
 			}
 		}
+
+		$this -> render('/Inventories/edit');
 	}
 
 	/**
@@ -42,9 +50,9 @@ class InventoriesController extends AppController {
 		$ingredients = $this->requestAction('/ingredients/index');
 		$this->set('ingredients', $ingredients);
 		$this->set('units', $this->Inventory->enumUnit());
-
+		Debugger::log($this->request->data);
 		if ($this->request->is ( 'post' )) {
-			Debugger::log($this->request->data());
+			Debugger::log($this->request->data);
 			if ($this->Inventory->save ( $this->request->data )) {
 				$this->Session->setFlash ( 'Inventory item added!' );
 
@@ -67,9 +75,22 @@ class InventoriesController extends AppController {
 
 			return $inventory;
 		}
+	}
 
+	public function delete() {
+		$this->request->onlyAllow('post');
 
+		$explode = explode('.', $this->request->data('id'));
+		$this->request->data['id'] = $explode[0];
+		$this->Inventory->id = $this->request->data['id'];
+		Debugger::log($this->request->data);
 
+		if ($this->Inventory->delete()) {
+			$this->Session->setFlash(__('Item deleted'));
+			return $this->redirect(array('action' => 'edit'));
+		}
+		$this->Session->setFlash(__('Item was not deleted'));
+		return $this->redirect(array('action' => 'edit'));
 	}
 
 }
