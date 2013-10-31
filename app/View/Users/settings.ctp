@@ -1,17 +1,18 @@
 <?php
-$email = $this->Form->input('User.email');
+echo $this->Form->create;
+$email = $this->Form->input('User.email', array('label' => false));
 $slider = $this->html->div('', '', array('id' => 'slider'));
+$end = '<center>' . $this->Form->end('Submit') . '</center>';
 
 $settingsTableCells = $this->Html->tableCells(array(array('Change Email', $email), array('Skill Level', $slider)));
-echo $this->Html->div('grid_3', $this->Html->tag('table', $settingsTableCells));
+echo $this->Html->div('grid_4 table', $this->Html->tag('table', $settingsTableCells) . $end);
 
 $appTable = $this->element('ApplianceTable');
-echo $this->Html->div('grid_4 table', $appTable);
+echo $this->Html->div('grid_7 table', $appTable);
 
-$invTable = $this->element('InventoryTable');
-echo $this->Html->div('grid_4 table', $invTable);
 ?>
 
 <script>
 $('#slider').slider();
+$(document).ready(function(){$( "button" ).button();});
 </script>
