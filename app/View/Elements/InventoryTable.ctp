@@ -6,14 +6,19 @@
  */
 //if the $inventory variable didnt get passed into the element then request the data from the controller
 if(!isset($inventory))
-	$inventory = $this->requestAction ('/Inventories/edit');
+{
+	$data = $this->requestAction ('/Inventories/edit');
+	$inventory = $data[0];
+	$ingredients = $data[1];
+	$units = $data[2];
+}
 
 //for testing
 if(empty($inventory))
 	$inventory = array(array('Chicken Breast', 5, '0z'), array('Chicken Thighs', 10, '0z'));
 
 if(empty($options))
-	$options = array('id' => 'sidebar');
+	$options = array();
 $element = '';
 $headers = $this->Html->tableHeaders(array('Item', 'Quantity', 'Unit'));
 $headers = $this->Html->tag('thead', $headers);
@@ -73,4 +78,8 @@ $(document).ready( function () {
 
 $(document).ready(function(){$( "button" ).button()});
 
+$(document).click(function(){
+	$('button:disabled').addClass('ui-state-disabled');
+	$('button.ui-state-disabled:enabled').removeClass('ui-state-disabled');
+});
 </script>

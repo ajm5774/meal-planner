@@ -13,9 +13,9 @@ if(empty($appliances))
 	$appliances = array();
 
 if(empty($options))
-	$options = array('id' => 'sidebar');
+	$options = array();
 $element = '';
-$headers = $this->Html->tableHeaders(array('Id', 'Name'));
+$headers = $this->Html->tableHeaders(array('Name'));
 $headers = $this->Html->tag('thead', $headers);
 $tableCells = '';
 
@@ -23,7 +23,7 @@ foreach($appliances as $index => $theModel)
 {
 	$item = $theModel['UserAppliance'];
 	$tableRow = '';
-	foreach(array('id', 'app_id') as $field)
+	foreach(array('app_id') as $field)
 		$tableRow .= $this->Html->tag('td', $item[$field], array('id' => $item['id'] . '.' . $field . '.' . 'Col'));
 
 	$tableCells .= $this->Html->tag('tr', $tableRow, array('id' => $item['id'] . '.' . $field . '.' . 'Row'));
@@ -34,8 +34,7 @@ $element .= $this->Html->tag('button', 'Delete', array('id'=>'btnDeleteRow', 'cl
 $element .= $this->html->tag('table', $headers . $tableCells, array('id' => 'appTable', 'class' => 'display'));
 
 $form = $this->Form->create('users', array('id' => 'formAddNewRow', 'title' => 'Add Appliance'));
-$form .= $this->Form->input('id', array('id' => 'id', 'name' => 'id','label' => false, 'rel' => '0', 'div' => false, 'type' => 'hidden')) . '<br>';
-$form .= $this->Form->input('app_id', array('id' => 'app_id', 'name' => 'app_id','label' => 'Name', 'rel' => '1', 'div' => false, 'options' => $allAppliances, 'type' => 'select')) . '<br>';
+$form .= $this->Form->input('app_id', array('id' => 'app_id', 'name' => 'app_id','label' => 'Name', 'rel' => '0', 'div' => false, 'options' => $allAppliances, 'type' => 'select')) . '<br>';
 $form .= $this->Form->end();
 $element .= $form;
 echo $this->Html->div('', $element, $options);
@@ -49,7 +48,6 @@ $(document).ready( function () {
         sAddURL: "/UserAppliances/datatableAdd",
         sDeleteURL: "/UserAppliances/datatableDelete",
         "aoColumns": [
-                      {},
                       {
                     	  type: 'select',
                        data: '<?php echo json_encode($allAppliances);?>',
@@ -60,6 +58,10 @@ $(document).ready( function () {
               ]});
 } );
 
-$(document).ready(function(){$( "button" ).button()});
+$(document).ready(function(){$( "button" ).button();});
 
+$(document).click(function(){
+	$('button:disabled').addClass('ui-state-disabled');
+	$('button.ui-state-disabled:enabled').removeClass('ui-state-disabled');
+});
 </script>

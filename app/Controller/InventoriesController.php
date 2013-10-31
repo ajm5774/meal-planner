@@ -25,11 +25,11 @@ class InventoriesController extends AppController {
 	public function edit() {
 
 		$ingredients = $this->requestAction('/ingredients/index');
+		$units = $this->Inventory->enumUnit();
 		$this->set('ingredients', $ingredients);
-		$this->set('units', $this->Inventory->enumUnit());
-		Debugger::log($this->request->data);
+		$this->set('units', $units);
+
 		if ($this->request->is ( 'post' )) {
-			Debugger::log($this->request->data);
 			if ($this->Inventory->save ( $this->request->data )) {
 				$this->Session->setFlash ( 'Inventory item added!' );
 
@@ -49,7 +49,7 @@ class InventoriesController extends AppController {
 				$attr['ingredient_id'] = $ingredients[$attr['ingredient_id']];
 			}
 			$this->set('inventory', $inventory);
-			return $inventory;
+			return array($inventory, $ingredients, $units);
 		}
 	}
 
@@ -59,10 +59,8 @@ class InventoriesController extends AppController {
 		$explode = explode('.', $this->request->data('id'));
 		$this->request->data['id'] = $explode[0];
 		$this->Inventory->id = $this->request->data['id'];
-		Debugger::log($this->request->data);
 
 		if ($this->Inventory->delete()) {
-			$this->Session->setFlash(__('Item deleted'));
 			echo 'ok';
 			return $this->redirect(null);
 		}
@@ -86,19 +84,17 @@ class InventoriesController extends AppController {
 	 */
 	public function datatableEdit() {
 		if ($this->request->is ( 'post' )) {
-			Debugger::log($this->request->data);
 
 			$explode = explode('.', $this->request->data['id']);
 			$data['Inventory']['id'] = $explode[0];
 			$data['Inventory'][$this->request->data['field']] = $this->request->data['value'];
 			$data['Inventory']['user_id'] = $this->Auth->user('id');
-			Debugger::log($data);
+
 			if ($this->Inventory->save ( $data )) {
-				$this->Session->setFlash ( 'Inventory item edited!' );
 				echo $this->request->data['value'];
 				return $this->redirect(null);
 			} else {
-				$this->Session->setFlash ( 'Error adding item!' );
+				$this->Session->setFlash ( 'Error editting item!' );
 			}
 		}
 	}
@@ -115,7 +111,6 @@ class InventoriesController extends AppController {
 			$data['Inventory']['user_id'] = $id;
 			$r = $this->Inventory->create ();
 			if ($this->Inventory->save ( $data )) {
-				$this->Session->setFlash ( 'Inventory item added!' );
 				echo $this->Inventory->id;
 				return $this->redirect(null);
 			} else {

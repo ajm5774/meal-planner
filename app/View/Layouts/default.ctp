@@ -90,8 +90,9 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			<div id="flash">
 				<?php //echo $this->Session->flash(); ?>
 			</div>
-
-			<?php echo $this->fetch('content'); ?>
+			<div class="container_12">
+				<?php echo $this->fetch('content'); ?>
+			</div>
 	</div>
 	<div id="copyright" class="container">
 		<p>Copyright (c) 2013 SmartMeal.com All rights reserved. | Photos by <a href="http://google.com">Fotogrph</a> | Design by <a href="http://www.freecsstemplates.org/" rel="nofollow">FreeCSSTemplates.org</a>.</p>

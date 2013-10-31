@@ -44,11 +44,10 @@ class UserAppliancesController extends AppController {
 		Debugger::log($this->request->data);
 
 		if ($this->UserAppliance->delete()) {
-			$this->Session->setFlash(__('Item deleted'));
 			echo 'ok';
 			return $this->redirect(null);
 		}
-		$this->Session->setFlash(__('Item was not deleted'));
+		$this->Session->setFlash(__('Appliance was not removed'));
 		return $this->redirect(array('action' => 'edit'));
 	}
 	
@@ -76,11 +75,10 @@ class UserAppliancesController extends AppController {
 			$data['UserAppliance']['user_id'] = $this->Auth->user('id');
 			Debugger::log($data);
 			if ($this->UserAppliance->save ( $data )) {
-				$this->Session->setFlash ( 'Inventory item edited!' );
 				echo $this->request->data['value'];
 				return $this->redirect(null);
 			} else {
-				$this->Session->setFlash ( 'Error adding item!' );
+				$this->Session->setFlash ( 'Error editting appliance!' );
 			}
 		}
 	}
@@ -96,11 +94,10 @@ class UserAppliancesController extends AppController {
 			$data['UserAppliance']['user_id'] = $id;
 			$r = $this->UserAppliance->create ();
 			if ($this->UserAppliance->save ( $data )) {
-				$this->Session->setFlash ( 'Inventory item added!' );
 				echo $this->UserAppliance->id;
 				return $this->redirect(null);
 			} else {
-				$this->Session->setFlash ( 'Error adding item!' );
+				$this->Session->setFlash ( 'Error adding appliance!' );
 			}
 		}
 	}

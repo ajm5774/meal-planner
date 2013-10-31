@@ -1,3 +1,4 @@
 <?php
 echo $this->Session->flash();
-echo $this->element('InventoryTable', array('options' => array('class' => 'table', 'style' => 'width: 500px;')));
+$table = $this->Html->div('grid_12 table', $this->element('InventoryTable'));
+echo $this->Html->div('prefix_2 suffix_2', $table);
