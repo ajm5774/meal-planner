@@ -42,8 +42,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		<script type="text/javascript" charset="utf-8" src="/js/jquery.validate.js"></script>
 		
 
-		<script type="text/javascript" charset="utf-8" src="/js/jquery-ui-1.10.3.custom.js"></script>
-		<link href="/css/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" media="all" />
+ 		<script type="text/javascript" charset="utf-8" src="/js/jquery-ui-1.10.3.custom.js"></script>
+ 		<link href="/css/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" media="all" />
 
 </head>
 <body>
@@ -58,7 +58,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 				if($loggedIn)//This variable is past from the controller (see AppController::beforeFilter)
 				{
 					$menu = $this->html->tag('li', $this->html->tag('a', 'Inventory', array('href' => '/Inventories/edit', 'accesskey' => '1')));
-					$menu .= $this->html->tag('li', $this->html->tag('a', 'Schedule', array('href' => '/schedules/index', 'accesskey' => '2')));
+					$menu .= $this->html->tag('li', $this->html->tag('a', 'Schedule', array('href' => '/schedules/edit', 'accesskey' => '2')));
 					$menu .= $this->html->tag('li', $this->html->tag('a', 'Settings', array('href' => '/users/settings', 'accesskey' => '3')));
 					$menu .= $this->html->tag('li', $this->html->tag('a', 'Help', array('href' => '/pages/help', 'accesskey' => '4')));
 

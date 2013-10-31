@@ -30,12 +30,11 @@ foreach($inventory as $index => $item)
 $element .= $this->Html->tag('button', 'Add', array('id'=>'btnAddNewRow', 'class' => 'add_row'));
 $element .= $this->Html->tag('button', 'Delete', array('id'=>'btnDeleteRow', 'class' => 'delete_row'));
 
-echo $this->Html->div('add_delete_toolbar');
 $element .= $this->html->tag('table', $headers . $tableCells, array('id' => 'invTable', 'class' => 'display'));
 
 $form = $this->Form->create('users', array('id' => 'formAddNewRow', 'title' => 'Add Inventory Item'));
-$form .= $this->Form->input('Inventory.ingredient_id', array('rel' => '0', 'div' => false, 'options' => $ingredients, 'type' => 'select', 'id' => 'name')) . '<br>';
-$form .= $this->Form->input('Inventory.quantity', array('rel' => '1', 'div' => false, 'id' => 'quantity')) . '<br>';
+$form .= $this->Form->input('Inventory.ingredient_id', array('rel' => '0', 'div' => false, 'options' => $ingredients, 'type' => 'select')) . '<br>';
+$form .= $this->Form->input('Inventory.quantity', array('rel' => '1', 'div' => false, 'id' => 'quantity', 'default' => 1)) . '<br>';
 $form .= $this->Form->input('Inventory.unit', array('rel' => '2', 'div' => false, 'options' => $units)) . '<br>';
 $form .= $this->Form->end();
 $element .= $form;
@@ -66,6 +65,6 @@ $(document).ready( function () {
               ]});
 } );
 
-$(document).ready(function(){$( "button" ).button()});
+//$(document).ready(function(){$( "button" ).button()});
 
 </script>
