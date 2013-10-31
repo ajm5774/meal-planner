@@ -173,6 +173,11 @@ class AppSchema extends CakeSchema {
 					'null' => false,
 					'default' => 5
 			),
+			'deviation' => array (
+					'type' => 'integer',
+					'null' => false,
+					'default' => 5
+			),
 			'indexes' => array (
 					'PRIMARY' => array (
 							'column' => 'id',
