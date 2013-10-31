@@ -11,14 +11,6 @@ App::uses('CakeTime', 'Utility');
 class SchedulesController extends AppController {
 	var $name = 'Schedules';
 
-	public function index()
-	{
-
-		$data = $this->Schedule->find('all');
-		$this->set('schedule', $data);
-		return $data;
-	}
-
 	/**
 	 * attempts to add a user to the users table
 	 */
@@ -37,15 +29,7 @@ class SchedulesController extends AppController {
 	/**
 	 * attempts to add a user to the users table
 	 */
-	public function edit() {
-		if ($this->request->is ( 'post' )) {
-			if ($this->Schedule->save ( $this->request->data )) {
-				$this->Session->setFlash ( 'Inventory item added!' );
-
-			} else {
-				$this->Session->setFlash ( 'Error creating account!' );
-			}
-		}
+	public function index() {
 		if ($this->request->is ( 'get' )) {
 			$name = $this->Auth->user();
 			//$this->Inventory->contain();

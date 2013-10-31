@@ -58,7 +58,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 				if($loggedIn)//This variable is past from the controller (see AppController::beforeFilter)
 				{
 					$menu = $this->html->tag('li', $this->html->tag('a', 'Inventory', array('href' => '/Inventories/edit', 'accesskey' => '1')));
-					$menu .= $this->html->tag('li', $this->html->tag('a', 'Schedule', array('href' => '/schedules/edit', 'accesskey' => '2')));
+					$menu .= $this->html->tag('li', $this->html->tag('a', 'Schedule', array('href' => '/schedules/index', 'accesskey' => '2')));
 					$menu .= $this->html->tag('li', $this->html->tag('a', 'Settings', array('href' => '/users/settings', 'accesskey' => '3')));
 					$menu .= $this->html->tag('li', $this->html->tag('a', 'Help', array('href' => '/pages/help', 'accesskey' => '4')));
 
@@ -66,7 +66,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 				}
 				else
 				{
-					$menu = $this->html->tag('li', $this->html->tag('a', 'About', array('href' => '/pages/about_us', 'accesskey' => '1')));
+					$menu = $this->html->tag('li', $this->html->tag('a', 'About', array('href' => '/pages/home', 'accesskey' => '1')));
 					$menu .= $this->html->tag('li', $this->html->tag('a', 'Login', array('href' => '/users/login', 'accesskey' => '2')));
 					$menu .= $this->html->tag('li', $this->html->tag('a', 'Join', array('href' => '/users/add', 'accesskey' => '3')));
 				}

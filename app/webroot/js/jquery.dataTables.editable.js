@@ -466,7 +466,8 @@ returns true if plugin should continue with sending AJAX request, false will abo
                 if (!oSettings.oFeatures.bServerSide) {
                     jQuery.data(oAddNewRowForm, 'DT_RowId', data);
                     var values = fnTakeRowDataFromFormElements(oAddNewRowForm);
-                   
+                   console.log(data);
+                   console.log(values);
 
                     var rtn;
                     //Add values from the form into the table
