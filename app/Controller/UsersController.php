@@ -62,9 +62,29 @@ class UsersController extends AppController {
 
 	public function settings()
 	{
-		$data = $this->User->find('all');
-
-		$this->set('data', $data);
+		$id = $this->Auth->user('id');
+		if($this->request->is('get'))
+		{
+			$this->User->contain();
+			$user = $this->User->find('first', array('conditions' => array('id' => $id)));
+	
+			$this->data = $user;
+		}
+		if($this->request->is('put'))
+		{
+			$this->User->id = $this->request->data['User']['id'];
+			if ($this->User->save ( $this->request->data ))
+			{
+				$this->Session->setFlash ( 'Settings saved successfully!' );
+				$this->redirect ('/users/settings');
+				
+			}
+			else
+			{
+				$this->Session->setFlash ( 'Error saving settings!' );
+				$this->redirect ('/users/settings');
+			}
+		}
 	}
 
 	public function setup()
@@ -72,5 +92,28 @@ class UsersController extends AppController {
 		$this->loadModel('Ingredient');
 		$this->set('ingredients', $this->Ingredient->find('list'));
 		$this->set('units', $this->Ingredient->enumUnit());
+		$id = $this->Auth->user('id');
+		if($this->request->is('get'))
+		{
+			$this->User->contain();
+			$user = $this->User->find('first', array('conditions' => array('id' => $id)));
+		
+			$this->data = $user;
+		}
+		if($this->request->is('put'))
+		{
+			$this->User->id = $this->request->data['User']['id'];
+			if ($this->User->save ( $this->request->data ))
+			{
+				$this->Session->setFlash ( 'Setup completed successfully!' );
+				$this->redirect ('/schedules/index');
+		
+			}
+			else
+			{
+				$this->Session->setFlash ( 'Error saving settings!' );
+				$this->redirect ('/users/setup');
+			}
+		}
 	}
 }

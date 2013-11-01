@@ -22,3 +22,8 @@ $table = $this->html->tag('center', $table);
 echo $table;
 
 ?>
+
+<script>
+$(document).ready(function(){$( "input[type=submit]" ).button()});
+
+</script>

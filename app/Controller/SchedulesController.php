@@ -35,24 +35,26 @@ class SchedulesController extends AppController {
 			//$this->Inventory->contain();
 			$start = date('Y-m-d', strtotime('now'));
 			$end = date('Y-m-d', strtotime('+4 day'));
-			$schedule = $this->Schedule->find('all', array('conditions' => array('User.username' => $name, 'Schedule.date <=' => $end, 'Schedule.date >=' => $start)));
-			$meals['breakfast'] = Hash::extract($schedule, '{n}.Schedule[meal=1]');
-			$meals['lunch'] = Hash::extract($schedule, '{n}.Schedule[meal=2]');
-			$meals['dinner'] = Hash::extract($schedule, '{n}.Schedule[meal=3]');
-
+			$schedules = $this->Schedule->find('all', array('conditions' => array('User.username' => $name, 'Schedule.date <=' => $end, 'Schedule.date >=' => $start)));
 			$recipes = $this->Schedule->Recipe->find('list');
-
-			foreach($meals as &$meal)
+			
+			$meals = array();
+			foreach(array('Breakfast' => 1, 'Lunch' =>2, 'Dinner'=>3) as $meal => $mealNum)
 			{
-				foreach($meal as $index => &$fields)
+				$meals[$meal] = Hash::extract($schedules, '{n}.Schedule[meal=' . $mealNum . ']');
+				$dates = array();
+				for($i = 0; $i < 4; $i++)
 				{
-					$fields['recipe_id'] = $recipes[$fields['recipe_id']];
+					$date = date('Y-m-d', strtotime('+' . $i . ' days'));
+	
+					$dates[$date] = Hash::extract($meals[$meal], '{n}[date=' . $date . ']');
 				}
+				
+				$meals[$meal] = $dates;
 			}
-			$this->set('breakfasts', $meals['breakfast']);
-			$this->set('lunch', $meals['lunch']);
-			$this->set('dinner', $meals['dinner']);
-			$this->set('schedule', $schedule);
+			$this->set('meals', $meals);
+			$this->set('schedules', $schedules);
+			$this->set('recipes', $recipes);
 		}
 
 	}

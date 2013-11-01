@@ -25,9 +25,11 @@ class AppSchema extends CakeSchema {
 					App::uses ( 'ClassRegistry', 'Utility' );
 					$ingr = ClassRegistry::init ( 'Ingredient' );
 					$ingr->create ();
+					$ingredients = array('Chicken Breast', 'Waffle', 'Chicken Thighs', 'Flour', 'Sugar');
+					foreach($ingredients as $ingredient)
 					$ingr->save ( array (
 							'Ingredient' => array (
-									'name' => 'Chicken Breast'
+									'name' => $ingredient
 							)
 					) );
 
@@ -49,15 +51,30 @@ class AppSchema extends CakeSchema {
 				case 'schedules':
 					App::uses ( 'ClassRegistry', 'Utility' );
 					$sch = ClassRegistry::init ( 'Schedule' );
-					$sch->create ();
-					$sch->save ( array (
-							'Schedule' => array (
-									'user_id' => 1,
-									'recipe_id' => 1,
-									'date' => '2013-10-24',
-									'meal' => 1
-							)
-					) );
+					
+					for($i = 0; $i < 4; $i++)
+					{
+						$date = date('Y-m-d', strtotime('+' . $i . ' days'));
+						
+						$sch->create ();
+						$sch->save ( array (
+								'Schedule' => array (
+										'user_id' => 1,
+										'recipe_id' => 2,
+										'date' => $date,
+										'meal' => 1
+								)
+						) );
+						$sch->create ();
+						$sch->save ( array (
+								'Schedule' => array (
+										'user_id' => 1,
+										'recipe_id' => 1,
+										'date' => $date,
+										'meal' => 3
+								)
+						) );
+					}
 
 					break;
 				case 'user_recipes':
@@ -132,6 +149,18 @@ class AppSchema extends CakeSchema {
 									3) Cut chicken into bit size pieces.
 									4) more directions later...',
 
+									'skill' => '5 '
+							)
+					) );
+					
+					$recipe->create ();
+					$recipe->save ( array (
+							'Recipe' => array (
+									'name' => 'Waffles',
+									'Description' => 'Ingredients: Waffles
+					
+									Directions:
+									1) put them in the toaste',
 									'skill' => '5 '
 							)
 					) );
