@@ -34,13 +34,13 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		<link href="/css/demo_table_jui.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="/css/jquery.dataTables_themeroller.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="/css/jquery.dataTables.css" rel="stylesheet" type="text/css" media="all" />
-		
+
 		<script type="text/javascript" charset="utf-8" src="/js/jquery.js"></script>
 		<script type="text/javascript" charset="utf-8" src="/js/jquery.dataTables.js"></script>
 		<script type="text/javascript" charset="utf-8" src="/js/jquery.dataTables.editable.js"></script>
 		<script type="text/javascript" charset="utf-8" src="/js/jquery.jeditable.js"></script>
 		<script type="text/javascript" charset="utf-8" src="/js/jquery.validate.js"></script>
-		
+
 
  		<script type="text/javascript" charset="utf-8" src="/js/jquery-ui-1.10.3.custom.js"></script>
  		<link href="/css/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" media="all" />
@@ -77,8 +77,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		</div>
     </div>
     <?php
-
-			if(!$loggedIn)//This variable is past from the controller (see AppController::beforeFilter)
+			if($this->here === '/users/login')//This variable is past from the controller (see AppController::beforeFilter)
 			{
 
 				$image = $this->html->tag('img','', array('src' => '/img/healthy-51.jpg'));

@@ -53,7 +53,7 @@ class UsersController extends AppController {
 				$this->request->data['User'] = array_merge($this->request->data['User'], array('id' => $id));
 				$this->Auth->login($this->request->data['User']);
 				$this->Session->setFlash ( 'Your account has been successfully created!' );
-				$this->redirect ('/schedules/index');
+				$this->redirect ('/users/setup');
 			} else {
 				$this->Session->setFlash ( 'Error creating account!' );
 			}
