@@ -13,10 +13,6 @@ if(!isset($inventory))
 	$units = $data[2];
 }
 
-//for testing
-if(empty($inventory))
-	$inventory = array(array('Chicken Breast', 5, '0z'), array('Chicken Thighs', 10, '0z'));
-
 if(empty($options))
 	$options = array();
 $element = '';
