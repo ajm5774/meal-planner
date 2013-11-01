@@ -20,7 +20,7 @@ foreach($mealTypes as $meals)
 	$cols = '';
 	foreach ( $meals as $index => $meal ) {
 		(null === $meal ['recipe_id'])? $temp = '':$temp = $meal ['recipe_id'];
-		$cols .= $this->Html->tag ( 'td', $temp );
+		$cols .= $this->Html->tag ( 'td', $temp, array('style') );
 	}
 	$tableCells .= $this->Html->tag ( 'tr', $cols );
 }
