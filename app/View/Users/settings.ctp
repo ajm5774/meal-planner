@@ -40,10 +40,18 @@ $settingsTableCells = $this->Html->tableCells ( array (
 				$devSlider 
 		) 
 ) );
-echo $this->Html->div ( 'grid_4 table', $this->Html->tag ( 'table', $settingsTableCells ) . $end );
+echo $this->Html->div ( 'grid_5 table', $this->Html->tag ( 'table', $settingsTableCells ) . $end );
 
 $appTable = $this->element ( 'ApplianceTable' );
 echo $this->Html->div ( 'grid_7 table', $appTable );
+
+//echo '<br><br>';
+
+$dislikesTable = $this->element ( 'DislikesTable' );
+echo $this->Html->div ( 'grid_7 table', $dislikesTable );
+
+$favoritesTable = $this->element ( 'FavoritesTable' );
+echo $this->Html->div ( 'grid_6 table', $favoritesTable );
 
 ?>
 

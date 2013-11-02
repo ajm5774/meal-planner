@@ -86,7 +86,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			}
 	?>
 	<div id="wrapper">
-			<div class="container_12">
+			<div class="container_24">
 				<?php echo $this->fetch('content'); ?>
 			</div>
 	</div>

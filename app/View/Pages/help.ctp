@@ -6,7 +6,7 @@ $(function() {
 </head>
 <body>
 
-	<div id="accordion" style="font-size: 14px" class="prefix_2 grid_8 suffix_2">
+	<div id="accordion" style="font-size: 14px" class="prefix_4 grid_16 suffix_4">
 		<h3>How it works</h3>
 		<div>
 			<p>

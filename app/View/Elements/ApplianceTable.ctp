@@ -15,7 +15,7 @@ if(empty($appliances))
 if(empty($options))
 	$options = array();
 $element = '';
-$headers = $this->Html->tableHeaders(array('Name'));
+$headers = $this->Html->tableHeaders(array('Appliance'));
 $headers = $this->Html->tag('thead', $headers);
 $tableCells = '';
 
@@ -28,12 +28,12 @@ foreach($appliances as $index => $theModel)
 
 	$tableCells .= $this->Html->tag('tr', $tableRow, array('id' => $item['id'] . '.' . $field . '.' . 'Row'));
 }
-$element .= $this->Html->tag('button', 'Add', array('id'=>'btnAddNewRow', 'class' => 'add_row'));
-$element .= $this->Html->tag('button', 'Delete', array('id'=>'btnDeleteRow', 'class' => 'delete_row'));
+$element .= $this->Html->tag('button', 'Add', array('id'=>'btnAddNewRowApps', 'class' => 'add_row'));
+$element .= $this->Html->tag('button', 'Delete', array('id'=>'btnDeleteRowApps', 'class' => 'delete_row'));
 
 $element .= $this->html->tag('table', $headers . $tableCells, array('id' => 'appTable', 'class' => 'display'));
 
-$form = $this->Form->create('users', array('id' => 'formAddNewRow', 'title' => 'Add Appliance'));
+$form = $this->Form->create('users', array('id' => 'formAddNewRowApps', 'title' => 'Add Appliance'));
 $form .= $this->Form->input('app_id', array('id' => 'app_id', 'name' => 'app_id','label' => 'Name', 'rel' => '0', 'div' => false, 'options' => $allAppliances, 'type' => 'select')) . '<br>';
 $form .= $this->Form->end();
 $element .= $form;
@@ -47,6 +47,11 @@ $(document).ready( function () {
         sUpdateURL: "/UserAppliances/datatableEdit",
         sAddURL: "/UserAppliances/datatableAdd",
         sDeleteURL: "/UserAppliances/datatableDelete",
+        sAddNewRowFormId: "formAddNewRowApps",
+        sAddNewRowButtonId: "btnAddNewRowApps",
+        sDeleteRowButtonId: "btnDeleteRowApps",
+        sAddNewRowOkButtonId: "btnAddNewAppOK",
+        sAddNewRowCancelButtonId: "btnAddNewAppCancel",
         "aoColumns": [
                       {
                     	  type: 'select',
