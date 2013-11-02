@@ -31,11 +31,11 @@ class SchedulesController extends AppController {
 	 */
 	public function index() {
 		if ($this->request->is ( 'get' )) {
-			$name = $this->Auth->user();
+			$id = $this->Auth->user('id');
 			//$this->Inventory->contain();
 			$start = date('Y-m-d', strtotime('now'));
 			$end = date('Y-m-d', strtotime('+4 day'));
-			$schedules = $this->Schedule->find('all', array('conditions' => array('User.username' => $name, 'Schedule.date <=' => $end, 'Schedule.date >=' => $start)));
+			$schedules = $this->Schedule->find('all', array('conditions' => array('User.id' => $id, 'Schedule.date <=' => $end, 'Schedule.date >=' => $start)));
 			$recipes = $this->Schedule->Recipe->find('list');
 			
 			$meals = array();
@@ -55,14 +55,43 @@ class SchedulesController extends AppController {
 			$this->set('meals', $meals);
 			$this->set('schedules', $schedules);
 			$this->set('recipes', $recipes);
+			
+			$this->loadModel('User');
+			$this->User->contain();
+			$this->set('user', $this->User->find('first', array('conditions' => array('id' => $this->Auth->user('id')))));
 		}
 
 	}
 
 	public function generate()
 	{
+		$numDays = $this->request->data['Schedule']['numDays'];
+		
+		$this->loadModel('Inventory');
+		$this->loadModel('User');
+		$this->loadModel('Recipe');
 		$inventory = $this->Inventory->find('all');
-
-		$schedule = $this->Schedule->generate($inventory);
+		$recipes = $this->Recipe->find('list');
+		
+		$data = array('User' => array('id' => $this->Auth->user('id'), 'sched_gen' => date ( 'Y-m-d', strtotime ( '+' . $numDays . ' days' ) )));
+		Debugger::log($data);
+		Debugger::log($this->Auth->user());
+		$result = $this->User->save($data);
+		Debugger::log($result);
+		$schedule = $this->Schedule->generate($inventory, $recipes, $numDays);
+		
+		$this->redirect('/Schedules/index');
+	}
+	
+	public function clear()
+	{
+		$this->Schedule->deleteAll(array('user_id' => $this->Auth->user('id')));
+		
+		$data = array('User' => array('id' => $this->Auth->user('id'), 'sched_gen' => date ( 'Y-m-d', strtotime ( '-1 days' ) )));
+		Debugger::log($this->Auth->user());
+		$this->loadModel('User');
+		$result = $this->User->save($data);
+		
+		$this->redirect('/Schedules/index');
 	}
 }

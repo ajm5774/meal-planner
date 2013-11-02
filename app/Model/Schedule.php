@@ -7,7 +7,7 @@
 class Schedule extends AppModel {
 	public $belongsTo = array('Recipe', 'User');
 	
-	public $actsAs = array('GreedySchedule');
+	public $actsAs = array('Random');
 
 	const BREAKFAST = 0;
 	const LUNCH = 1;

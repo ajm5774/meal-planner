@@ -28,7 +28,7 @@ echo $this->html->div('clear','');
 $inv = $this->Html->tag ( 'p', "3. Create an inventory by adding items", array (
 		'class' => 'step' 
 ) );
-$inv .= $this->HTml->div ( 'grid_24 table', $this->element ( 'InventoryTable' ) );
+$inv .= $this->HTml->div ( 'grid_12 table', $this->element ( 'InventoryTable' ) );
 echo $this->Html->div ( 'prefix_6 grid_12 suffix_6', $inv );
 
 echo $this->html->div('clear','');
@@ -36,7 +36,7 @@ echo $this->html->div('clear','');
 $app = $this->Html->tag ( 'p', "4. Set your kitchen appliances by adding them to the table", array (
 		'class' => 'step' 
 ) );
-$app .= $this->HTml->div ( 'grid_24 table', $this->element ( 'ApplianceTable' ) );
+$app .= $this->HTml->div ( 'grid_12 table', $this->element ( 'ApplianceTable' ) );
 echo $this->Html->div ( 'prefix_6 grid_12 suffix_6', $app );
 
 echo $this->Form->create ();

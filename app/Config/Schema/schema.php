@@ -16,7 +16,8 @@ class AppSchema extends CakeSchema {
 							'User' => array (
 									'username' => 'test',
 									'password' => 'test',
-									'email' => 'test@test.com' 
+									'email' => 'test@test.com',
+									'sched_gen' => date ( 'Y-m-d', strtotime ( 'now' ) )
 							) 
 					) );
 					
@@ -66,7 +67,7 @@ class AppSchema extends CakeSchema {
 					App::uses ( 'ClassRegistry', 'Utility' );
 					$sch = ClassRegistry::init ( 'Schedule' );
 					
-					for($i = 0; $i < 4; $i ++) {
+					/*for($i = 0; $i < 4; $i ++) {
 						$date = date ( 'Y-m-d', strtotime ( '+' . $i . ' days' ) );
 						
 						$sch->create ();
@@ -78,6 +79,17 @@ class AppSchema extends CakeSchema {
 										'meal' => 1 
 								) 
 						) );
+						
+						$sch->create ();
+						$sch->save ( array (
+								'Schedule' => array (
+										'user_id' => 1,
+										'recipe_id' => 3,
+										'date' => $date,
+										'meal' => 2
+								)
+						) );
+						
 						$sch->create ();
 						$sch->save ( array (
 								'Schedule' => array (
@@ -88,7 +100,7 @@ class AppSchema extends CakeSchema {
 								) 
 						) );
 					}
-					
+					*/
 					break;
 				case 'user_recipes' :
 					App::uses ( 'ClassRegistry', 'Utility' );
@@ -100,6 +112,15 @@ class AppSchema extends CakeSchema {
 									'recipe_id' => 1,
 									'opinion' => 1 
 							) 
+					) );
+					
+					$sch->create ();
+					$sch->save ( array (
+							'UserRecipe' => array (
+									'user_id' => 1,
+									'recipe_id' => 2,
+									'opinion' => 0
+							)
 					) );
 					
 					break;
@@ -144,11 +165,31 @@ class AppSchema extends CakeSchema {
 					$recIng->create ();
 					$recIng->save ( array (
 							'RecipeIngredient' => array (
-									'recipe' => 1,
-									'food_id' => 1,
+									'recipe_id' => 1,
+									'ingredient_id' => 1,
 									'quantity' => 10,
 									'unit' => 3 
 							) 
+					) );
+					
+					$recIng->create ();
+					$recIng->save ( array (
+							'RecipeIngredient' => array (
+									'recipe_id' => 2,
+									'ingredient_id' => 2,
+									'quantity' => 2,
+									'unit' => 2
+							)
+					) );
+					
+					$recIng->create ();
+					$recIng->save ( array (
+							'RecipeIngredient' => array (
+									'recipe_id' => 3,
+									'ingredient_id' => 1,
+									'quantity' => .5,
+									'unit' => 3
+							)
 					) );
 					
 					break;
@@ -156,15 +197,16 @@ class AppSchema extends CakeSchema {
 					App::uses ( 'ClassRegistry', 'Utility' );
 					$recipe = ClassRegistry::init ( 'Recipe' );
 					$recipe->create ();
+					
+					$directions1 =  "1) Cook chicken in a pan.\n" . 
+									"2) Cook pasta in pot.\n" . 
+									"3) Cut chicken into bit size pieces.\n" . 
+									"4) more directions later...";
+					
 					$recipe->save ( array (
 							'Recipe' => array (
 									'name' => 'Chicken Marsala',
-									'Description' => 'Ingredients: .5 lbs Chicken Breast, 8 oz. Tomato Paste\n\n' . 
-									'Directions:\n' . 
-									'1) Cook chicken in a pan.\n' . 
-									'2) Cook pasta in pot.\n' . 
-									'3) Cut chicken into bit size pieces.\n' . 
-									'4) more directions later...',
+									'description' => $directions1,
 									
 									'skill' => '5 ' 
 							) 
@@ -174,12 +216,26 @@ class AppSchema extends CakeSchema {
 					$recipe->save ( array (
 							'Recipe' => array (
 									'name' => 'Waffles',
-									'Description' => 'Ingredients: Waffles
-					
-									Directions:
-									1) put them in the toaste',
+									"description" => "1) Put waffles in the toaster\n" .
+													"2) Lightly spread butter\n" . 
+													"3) Smother with syrup\n",
 									'skill' => '5 ' 
 							) 
+					) );
+					
+					$recipe->create ();
+					$recipe->save ( array (
+							'Recipe' => array (
+									"name" => "Buffalo Chicken Wrap\n",
+									"description" => "1) Cook chicken on pan for 10 minutes\n" .
+									"2) Combine hot sauce and butter in sauce pan on low for 5 minutes\n" .
+									"3) Remove sauce from stove and let sit until warm\n" .
+									"4) Coat chicken with sauce\n" .
+									"5) Lay a handful of lettuce on an open wrap\n" .
+									"6) Cut chicken and lay it on top of lettuce\n" .
+									"7) Fold in sides of wrap and roll center until closed\n",
+									'skill' => '5 '
+							)
 					) );
 					
 					break;
@@ -223,6 +279,11 @@ class AppSchema extends CakeSchema {
 					'type' => 'integer',
 					'null' => false,
 					'default' => 5 
+			),
+			'sched_gen' => array (
+					'type' => 'date',
+					'null' => true,
+					'default' => null
 			),
 			'indexes' => array (
 					'PRIMARY' => array (

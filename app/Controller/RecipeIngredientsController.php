@@ -15,9 +15,27 @@ class RecipeIngredientsController extends AppController {
 
 	public function view($recipeId)
 	{
-		$data = $this->RecipeIngredient->find('all', array('conditions' => array('recipe_id' => $recipeId)));
+		$data = $this->RecipeIngredient->find('all', array('conditions' => array('RecipeIngredient.recipe_id' => $recipeId)));
+		$recName = $data[0]['Recipe']['name'];
 		
-		$this->set('data', $data);
+		$ingredients = '';
+		
+		foreach($data as $ingredient)
+		{
+			$unit = $this->RecipeIngredient->enumUnit($data[0]['RecipeIngredient']['unit']);
+			$quantity = $data[0]['RecipeIngredient']['quantity'];
+			$name = $data[0]['Ingredient']['name'];
+		
+			$ingredients .= $quantity . ' ' .  $unit . ' ' . $name . ',';
+		}
+		
+		$ingredients = rtrim($ingredients, ",");
+		
+		$instructions = $data[0]['Recipe']['description'];
+		$instructions = str_replace("\n","<br>",$instructions);
+		
+		$this->set(compact('ingredients', 'instructions', 'recName'));
+		$this->layout = 'recipe';
 		
 		return $data;
 	}

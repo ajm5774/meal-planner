@@ -15,7 +15,7 @@ if(empty($appliances))
 if(empty($options))
 	$options = array();
 $element = '';
-$headers = $this->Html->tableHeaders(array('Appliance'));
+$headers = $this->Html->tableHeaders(array('Appliances'));
 $headers = $this->Html->tag('thead', $headers);
 $tableCells = '';
 

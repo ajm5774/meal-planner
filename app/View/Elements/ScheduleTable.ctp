@@ -12,7 +12,7 @@ foreach($meals as $meal => $dates)
 		if(isset($index[0]['recipe_id']))
 		{
 			$content = $recipes[$index[0]['recipe_id']];
-			$link = $this->html->tag('a',$content , array('href' => '/RecipeIngredients/view/' . $index[0]['recipe_id']));
+			$link = $this->html->tag('a',$content , array('class' => 'dialog', 'url' => '/RecipeIngredients/view/' . $index[0]['recipe_id'], 'href' => '#'));
 			$cols .= $this->Html->tag ( 'td', $link, array('class' => 'meal') );
 		}
 		else
@@ -22,3 +22,21 @@ foreach($meals as $meal => $dates)
 }
 $sched = $this->Html->tag ( 'table', $tableHeaders . $tableCells, array('class' => 'table'));
 echo $sched;
+
+echo $this->Html->div('grid_6', '', array('id' => 'dialog', 'title' => 'Meal Description'));
+?>
+
+<script>
+$( "#dialog" ).dialog({ autoOpen: false, width: 'auto' });
+$('a.dialog').click(function(event){
+	console.log(event.target);
+	$.ajax({url: $(event.target).attr('url'),
+			success: function(data){
+						$('#dialog').html(data);
+						$( '#dialog' ).dialog( "open" );
+					}
+	});
+	
+	
+})
+</script>
