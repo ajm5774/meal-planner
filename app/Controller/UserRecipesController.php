@@ -17,7 +17,7 @@ class UserRecipesController extends AppController {
 	public function edit($opinion)
 	{
 		$id = $this->Auth->user();
-	
+
 		$recipe = new Recipe();
 		$allRecipes = $recipe->find('list');
 		if(isset($opinion))
@@ -31,13 +31,13 @@ class UserRecipesController extends AppController {
 			unset($models['UserRecipe']['user_id']);
 			$models['UserRecipe']['recipe_id'] = $allRecipes[$models['UserRecipe']['recipe_id']];
 		}
-			
+
 		$this->set('recipes', $recipes);
 		$this->set('allRecipes', $allRecipes);
-	
+
 		return array($recipes, $allRecipes);
 	}
-	
+
 	public function datatableDelete() {
 		$this->request->onlyAllow('post');
 
@@ -53,11 +53,11 @@ class UserRecipesController extends AppController {
 		$this->Session->setFlash(__('Recipe was not removed'));
 		return $this->redirect(array('action' => 'edit'));
 	}
-	
+
 	/**
 	 * attempts to add a user to the users table
-	 * 
-	 * Data comes in the form: 
+	 *
+	 * Data comes in the form:
 	 * array(
 	 *     'value' => '14',
 	 *     'id' => '0.unit.Row',
@@ -85,13 +85,13 @@ class UserRecipesController extends AppController {
 			}
 		}
 	}
-	
+
 	/**
 	 * attempts to add a user to the users table
 	 */
 	public function datatableAdd() {
 		$id = $this->Auth->user('id');
-	
+
 		if ($this->request->is ( 'post' )) {
 			$data['UserRecipe'] = $this->request->data;
 			$data['UserRecipe']['user_id'] = $id;

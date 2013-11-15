@@ -35,6 +35,7 @@ $element .= $this->html->tag('table', $headers . $tableCells, array('id' => 'fav
 
 $form = $this->Form->create('users', array('id' => 'formAddNewRowFavs', 'title' => 'Add Recipe to Favorites'));
 $form .= $this->Form->input('recipe_id', array('id' => 'recipe_id', 'name' => 'recipe_id','label' => 'Name', 'rel' => '0', 'div' => false, 'options' => $allRecipes, 'type' => 'select')) . '<br>';
+$form .= $this->Form->input('opinion', array('id' => 'opinion', 'name' => 'opinion','label' => false, 'div' => false,'type' => 'hidden', 'value' => 1)) . '<br>';
 $form .= $this->Form->end();
 $element .= $form;
 echo $this->Html->div('', $element, $options);
