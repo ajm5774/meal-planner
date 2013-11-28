@@ -105,8 +105,8 @@ class UsersController extends AppController {
 			$this->User->id = $this->request->data['User']['id'];
 			if ($this->User->save ( $this->request->data ))
 			{
-				$this->Session->setFlash ( 'Setup completed successfully!' );
-				$this->redirect ('/schedules/index');
+				$this->Session->setFlash ( 'Setup part 1 completed successfully!' );
+				$this->redirect ('/users/setup2');
 		
 			}
 			else
@@ -115,5 +115,18 @@ class UsersController extends AppController {
 				$this->redirect ('/users/setup');
 			}
 		}
+	}
+	
+	public function setup2()
+	{
+		if($this->request->is('post'))
+		{
+			$this->Session->setFlash ( 'Setup part 2 completed successfully!' );
+			return $this->redirect ('/schedules/index');
+		}
+	}
+	
+	public function meal_preferences()
+	{
 	}
 }

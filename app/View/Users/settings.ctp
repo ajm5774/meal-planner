@@ -36,23 +36,14 @@ $settingsTableCells = $this->Html->tableCells ( array (
 				$slider 
 		),
 		array (
-				'Deviation',
+				'Meal Diversity',
 				$devSlider 
 		) 
 ) );
-echo $this->Html->div ( 'grid_6 table', $this->Html->tag ( 'table', $settingsTableCells ) . $end );
+echo $this->Html->div ( 'grid_8 table', $this->Html->tag ( 'table', $settingsTableCells ) . $end );
 
 $appTable = $this->element ( 'ApplianceTable' );
-echo $this->Html->div ( 'grid_6 table', $appTable );
-
-//echo '<br><br>';
-
-$dislikesTable = $this->element ( 'DislikesTable' );
-echo $this->Html->div ( 'grid_6 table', $dislikesTable );
-
-$favoritesTable = $this->element ( 'FavoritesTable' );
-echo $this->Html->div ( 'grid_6 table', $favoritesTable );
-
+echo $this->Html->div ( 'grid_12 table', $appTable );
 ?>
 
 <script>

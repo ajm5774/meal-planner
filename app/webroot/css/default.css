@@ -54,8 +54,9 @@
 	
 	.container
 	{
-		/*margin: 0px auto;*/
-		width: 1200px;
+		/*margin: 0px auto;
+		width: 1200px;*/
+		padding: 0px 0px 0px 0px
 	}
 	
 	.table
@@ -408,7 +409,7 @@
 
 	#logo {
 		float: left;
-		width: 500px;
+		/*width: 500px;*/
 		margin: 0;
 		padding: 0 0 0 30px;
 		color: #FFFFFF;
@@ -454,9 +455,10 @@
 	
 	#menu {
 		float: right;
-		padding: 0em 2em;
+		padding: 0em 1em;
 		background: #5EB990 url(images/bg01.png) repeat;
 		border-radius: 8px;
+		margin-right: 20px;
 	}
 	
 	#menu ul {
@@ -478,9 +480,9 @@
 	
 	#menu a {
 		display: block;
-		line-height: 80px;
+		line-height: 60px;
 		margin-right: 1px;
-		padding: 4px 20px 0px 20px;
+		padding: 4px 10px 0px 10px;
 		letter-spacing: 1px;
 		text-decoration: none;
 		text-align: center;
@@ -489,7 +491,13 @@
 		font-size: 0.90em;
 		font-weight: 300;
 		color: #FFFFFF;
-		border: none;
+		border: 1px;
+		border-color: black;
+		border-right-style:solid;
+	}
+	
+	#menu .last {
+		border-right-style:none;
 	}
 	
 	#menu .current_page_item a {

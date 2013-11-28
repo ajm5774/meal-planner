@@ -94,4 +94,16 @@ class SchedulesController extends AppController {
 		
 		$this->redirect('/Schedules/index');
 	}
+	
+
+	public function advanceMeal($scheduleId)
+	{
+		$this->loadModel('Schedule');
+		$recipe = $this->Schedule->find('all', array('conditions' => array('Schedule.id' => $scheduleId)));
+		$result = $this->Schedule->delete($scheduleId);
+		Debugger::log($mealId);
+		Debugger::log($result);
+		Debugger::log($recipe);
+		return $this->redirect('/Schedules/index');
+	}
 }

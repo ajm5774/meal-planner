@@ -12,7 +12,7 @@ $slider = $this->html->div ( '', '', array (
 ) );
 echo $this->Html->div ( 'prefix_6 grid_6 suffix_12', $slider );
 
-$step2 = $this->Html->tag ( 'p', "2. Use slider to select your meal deviation", array (
+$step2 = $this->Html->tag ( 'p', "2. Use slider to select your meal diversity", array (
 		'class' => 'step' 
 ) );
 echo $this->html->div ( 'prefix_6 grid_12 suffix_6', $step2 );
@@ -49,7 +49,9 @@ echo $this->Form->input ( 'User.deviation', array (
 		'type' => 'hidden' 
 ) );
 echo $this->Form->input ( 'User.id' );
-echo '<center>' . $this->Form->end ( 'Submit' ) . '</center>';
+echo '<center>' . $this->Form->end ( 'Next' ) . '</center>';
+
+echo $this->Html->div('', $this->html->tag('img','', array('href' => '/images/helpDialog1.png')), array('id' => 'dialog', 'title' => 'Introduction'));
 
 ?>
 
@@ -67,4 +69,6 @@ $('#slider1').slider({min:1, max:10, step:1, value: <?php echo $data['User']['sk
 		}
 		});
 $(document).ready(function(){$( "input[type=submit]" ).button();});
+
+$( "#dialog" ).dialog({ autoOpen: true, width: 'auto' });
 </script>

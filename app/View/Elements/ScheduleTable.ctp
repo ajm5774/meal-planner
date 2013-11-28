@@ -1,5 +1,4 @@
 <?php
-
 $dates = array_keys($meals['Breakfast']);
 array_unshift($dates, '');
 $tableHeaders = $this->html->tableHeaders($dates);
@@ -7,13 +6,14 @@ $tableHeaders = $this->html->tableHeaders($dates);
 $tableCells = '';
 foreach($meals as $meal => $dates)
 {
-	$cols = $this->Html->tag ( 'td', $meal, array('class' => 'meal') );
+	$cols = $this->Html->tag ( 'td', '<b>' . $meal . '</b>', array('class' => 'meal') );
 	foreach ( $dates as $date => $index ) {
 		if(isset($index[0]['recipe_id']))
 		{
-			$content = $recipes[$index[0]['recipe_id']];
-			$link = $this->html->tag('a',$content , array('class' => 'dialog', 'url' => '/RecipeIngredients/view/' . $index[0]['recipe_id'], 'href' => '#'));
-			$cols .= $this->Html->tag ( 'td', $link, array('class' => 'meal') );
+			$mealLink = $this->html->tag('a',$recipes[$index[0]['recipe_id']] , array('class' => 'dialog', 'url' => '/RecipeIngredients/view/' . $index[0]['recipe_id'], 'href' => '#'));
+			$advanceMeal = $this->html->tag('button', 'Make Meal!', array('onClick' => 'makeMealConfirmation(this)', 'href' =>'/Schedules/advanceMeal/' . $index[0]['id']));
+			$content = $mealLink . '<br>' . $advanceMeal;
+			$cols .= $this->Html->tag ( 'td', $content, array('class' => 'meal') );
 		}
 		else
 			$cols .= $this->Html->tag ( 'td', '           ', array('class' => 'meal') );
@@ -37,6 +37,14 @@ $('a.dialog').click(function(event){
 					}
 	});
 	
-	
 })
+
+function makeMealConfirmation(element)
+{
+	url = $(element).attr('href');
+	if(confirm('Are you sure you wish to remove the meal ingredients from your inventory?'))
+	{
+		window.location = url;
+	}
+}
 </script>

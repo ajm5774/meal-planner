@@ -57,18 +57,34 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
 				if($loggedIn)//This variable is past from the controller (see AppController::beforeFilter)
 				{
-					$menu = $this->html->tag('li', $this->html->tag('a', 'Inventory', array('href' => '/Inventories/edit', 'accesskey' => '1')));
-					$menu .= $this->html->tag('li', $this->html->tag('a', 'Schedule', array('href' => '/schedules/index', 'accesskey' => '2')));
-					$menu .= $this->html->tag('li', $this->html->tag('a', 'Settings', array('href' => '/users/settings', 'accesskey' => '3')));
-					$menu .= $this->html->tag('li', $this->html->tag('a', 'Help', array('href' => '/pages/help', 'accesskey' => '4')));
+					$icon = '<span style=display:inline-block class="ui-icon ui-icon-star"></span>';
+					$menu = $this->html->tag('li', $this->html->tag('a', $icon . '  Meal Preferences', array('href' => '/users/meal_preferences', 'accesskey' => '1')));
+					
+					$icon = '<span style=display:inline-block class="ui-icon ui-icon-cart"></span>';
+					$menu .= $this->html->tag('li', $this->html->tag('a', $icon . '  Inventory', array('href' => '/Inventories/edit', 'accesskey' => '2')));
+					
+					$icon = '<span style=display:inline-block class="ui-icon ui-icon-clipboard"></span>';
+					$menu .= $this->html->tag('li', $this->html->tag('a', $icon . '  Schedule', array('href' => '/schedules/index', 'accesskey' => '3')));
+					
+					$icon = '<span style=display:inline-block class="ui-icon ui-icon-wrench"></span>';
+					$menu .= $this->html->tag('li', $this->html->tag('a', $icon . '  Kitchen Settings', array('href' => '/users/settings', 'accesskey' => '4')));
+					
+					$icon = '<span style=display:inline-block class="ui-icon ui-icon-info"></span>';
+					$menu .= $this->html->tag('li', $this->html->tag('a', $icon . '  Help', array('href' => '/pages/help', 'accesskey' => '5')));
 
-					$menu .= $this->html->tag('li', $this->html->tag('a', 'logout', array('href' => '/users/logout', 'accesskey' => '5')));
+					$icon = '<span style=display:inline-block class="ui-icon ui-icon-person"></span>';
+					$menu .= $this->html->tag('li', $this->html->tag('a', $icon . '  Logout', array('href' => '/users/logout', 'accesskey' => '6', 'class' => 'last')));
 				}
 				else
 				{
-					$menu = $this->html->tag('li', $this->html->tag('a', 'About', array('href' => '/pages/home', 'accesskey' => '1')));
-					$menu .= $this->html->tag('li', $this->html->tag('a', 'Login', array('href' => '/users/login', 'accesskey' => '2')));
-					$menu .= $this->html->tag('li', $this->html->tag('a', 'Join', array('href' => '/users/add', 'accesskey' => '3')));
+					$icon = '<span style=display:inline-block class="ui-icon ui-icon-info"></span>';
+					$menu = $this->html->tag('li', $this->html->tag('a', $icon . '  About', array('href' => '/pages/home', 'accesskey' => '1')));
+					
+					$icon = '<span style=display:inline-block class="ui-icon ui-icon-person"></span>';
+					$menu .= $this->html->tag('li', $this->html->tag('a', $icon . '  Login', array('href' => '/users/login', 'accesskey' => '2')));
+					
+					$icon = '<span style=display:inline-block class="ui-icon ui-icon-pencil"></span>';
+					$menu .= $this->html->tag('li', $this->html->tag('a', $icon . '  Sign up!', array('href' => '/users/add', 'accesskey' => '3', 'class' => 'last')));
 				}
 
 				echo $menu

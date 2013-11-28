@@ -118,5 +118,4 @@ class InventoriesController extends AppController {
 			}
 		}
 	}
-
 }
