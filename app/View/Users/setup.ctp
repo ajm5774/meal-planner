@@ -2,31 +2,31 @@
 $data = $this->request->data;
 
 $step1 = $this->Html->tag ( 'p', "1. Use slider to select your cooking skill level", array (
-		'class' => 'step' 
+		'class' => 'step'
 ) );
 echo $this->html->div ( 'prefix_6 grid_12 suffix_6', $step1 );
 
 $slider = $this->html->div ( '', '', array (
 		'id' => 'slider1',
-		'class' => 'slider' 
+		'class' => 'slider'
 ) );
 echo $this->Html->div ( 'prefix_6 grid_6 suffix_12', $slider );
 
 $step2 = $this->Html->tag ( 'p', "2. Use slider to select your meal diversity", array (
-		'class' => 'step' 
+		'class' => 'step'
 ) );
 echo $this->html->div ( 'prefix_6 grid_12 suffix_6', $step2 );
 
 $devSlider = $this->html->div ( '', '', array (
 		'id' => 'slider2',
-		'class' => 'slider' 
+		'class' => 'slider'
 ) );
 echo $this->Html->div ( 'prefix_6 grid_6 suffix_12', $devSlider );
 
 echo $this->html->div('clear','');
 
 $inv = $this->Html->tag ( 'p', "3. Create an inventory by adding items", array (
-		'class' => 'step' 
+		'class' => 'step'
 ) );
 $inv .= $this->HTml->div ( 'grid_12 table', $this->element ( 'InventoryTable' ) );
 echo $this->Html->div ( 'prefix_6 grid_12 suffix_6', $inv );
@@ -34,7 +34,7 @@ echo $this->Html->div ( 'prefix_6 grid_12 suffix_6', $inv );
 echo $this->html->div('clear','');
 
 $app = $this->Html->tag ( 'p', "4. Set your kitchen appliances by adding them to the table", array (
-		'class' => 'step' 
+		'class' => 'step'
 ) );
 $app .= $this->HTml->div ( 'grid_12 table', $this->element ( 'ApplianceTable' ) );
 echo $this->Html->div ( 'prefix_6 grid_12 suffix_6', $app );
@@ -42,16 +42,30 @@ echo $this->Html->div ( 'prefix_6 grid_12 suffix_6', $app );
 echo $this->Form->create ();
 echo $this->Form->input ( 'User.skill', array (
 		'id' => 'skill',
-		'type' => 'hidden' 
+		'type' => 'hidden'
 ) );
 echo $this->Form->input ( 'User.deviation', array (
 		'id' => 'deviation',
-		'type' => 'hidden' 
+		'type' => 'hidden'
 ) );
-echo $this->Form->input ( 'User.id' );
-echo '<center>' . $this->Form->end ( 'Next' ) . '</center>';
 
-echo $this->Html->div('', $this->html->tag('img','', array('href' => '/images/helpDialog1.png')), array('id' => 'dialog', 'title' => 'Introduction'));
+echo $this->Html->div('clear','');
+
+$end = '<center>' . $this->Form->end( 'Next' ) . '</center>';
+echo $this->Html->div('', '<br>' . $end);
+/*echo $this->Form->input ( 'User.id' );
+echo '<br>';
+$end = $this->Form->end( 'Next' );
+
+echo '<center><table><tr><td>' . $end . '</td></tr></table></center>';*/
+
+//$button = '';
+$button = $this->html->tag('button', 'Got it!', array('onclick' => 'closeDialog()'));
+
+$image = $this->html->image('/images/edit.png', array('style' => 'border-radius: 15px;'));
+$inner = $this->Html->div('', $image . '<br>' . $button);
+
+echo $this->Html->div('', $inner, array('id' => 'dialog', 'title' => 'Introduction'));
 
 ?>
 
@@ -71,4 +85,9 @@ $('#slider1').slider({min:1, max:10, step:1, value: <?php echo $data['User']['sk
 $(document).ready(function(){$( "input[type=submit]" ).button();});
 
 $( "#dialog" ).dialog({ autoOpen: true, width: 'auto' });
+
+function closeDialog()
+{
+	$( '#dialog' ).dialog( "close" );
+}
 </script>
