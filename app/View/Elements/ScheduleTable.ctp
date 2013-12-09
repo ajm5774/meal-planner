@@ -47,4 +47,14 @@ function makeMealConfirmation(element)
 		window.location = url;
 	}
 }
+
+$(document).ready(function(){
+	$("th").each(function(){
+		var date = "<?php echo date('Y-m-d', strtotime("now"));?>";
+			if($(this).html() == date)
+			{
+				$(this).addClass("today");
+			}
+		});
+});
 </script>

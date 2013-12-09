@@ -75,6 +75,13 @@
 		width: auto;
 		background: white;
 	}
+	
+	.today
+	{
+		background: yellow;
+		border: 1px black solid;
+		border-radius: 3px;
+	}
 
 
 /*********************************************************************************/

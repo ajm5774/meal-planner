@@ -53,19 +53,12 @@ echo $this->Html->div('clear','');
 
 $end = '<center>' . $this->Form->end( 'Next' ) . '</center>';
 echo $this->Html->div('', '<br>' . $end);
-/*echo $this->Form->input ( 'User.id' );
-echo '<br>';
-$end = $this->Form->end( 'Next' );
-
-echo '<center><table><tr><td>' . $end . '</td></tr></table></center>';*/
-
-//$button = '';
 $button = $this->html->tag('button', 'Got it!', array('onclick' => 'closeDialog()'));
 
-$image = $this->html->image('/images/edit.png', array('style' => 'border-radius: 15px;'));
-$inner = $this->Html->div('', $image . '<br>' . $button);
+$image = $this->html->image('/images/edit.png', array('style' => 'border-radius: 15px; border: 2px solid black'));
+$inner = $this->Html->div('', $image . '<br><center>' . $button . '</center>');
 
-echo $this->Html->div('', $inner, array('id' => 'dialog', 'title' => 'Introduction'));
+echo $this->Html->div('', $inner, array('id' => 'dialog', 'title' => 'Tooltip'));
 
 ?>
 

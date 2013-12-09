@@ -67,7 +67,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					$menu .= $this->html->tag('li', $this->html->tag('a', $icon . '  Schedule', array('href' => '/schedules/index', 'accesskey' => '3')));
 					
 					$icon = '<span style=display:inline-block class="ui-icon ui-icon-wrench"></span>';
-					$menu .= $this->html->tag('li', $this->html->tag('a', $icon . '  Kitchen Settings', array('href' => '/users/settings', 'accesskey' => '4')));
+					$menu .= $this->html->tag('li', $this->html->tag('a', $icon . '  Kitchen/Cook Settings', array('href' => '/users/settings', 'accesskey' => '4')));
 					
 					$icon = '<span style=display:inline-block class="ui-icon ui-icon-info"></span>';
 					$menu .= $this->html->tag('li', $this->html->tag('a', $icon . '  Help', array('href' => '/pages/help', 'accesskey' => '5')));
